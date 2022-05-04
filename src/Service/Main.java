@@ -1,15 +1,16 @@
 package Service;
+import DataAccess.UserDao;
+import Domain.User;
+
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) {
-        // temporary just to check the connection
-        try {
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:./DB/footballDB.db");
-            conn.createStatement().executeQuery("DELETE FROM Refere where id = 'uri'");
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-        }
+        UserApplication ua = new UserApplication();
+        System.out.println(ua.signUp("Ben", "ben123", new Date(), "Ben Aidlin"));
     }
 }
