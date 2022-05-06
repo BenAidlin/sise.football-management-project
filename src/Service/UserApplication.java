@@ -1,7 +1,7 @@
 package Service;
 
 import Domain.Status;
-import Domain.UserController;
+import Domain.Controllers.UserController;
 
 import java.util.Date;
 
