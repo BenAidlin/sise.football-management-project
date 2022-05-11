@@ -3,6 +3,7 @@ package DataAccess;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -16,13 +17,15 @@ public class UserDao extends Dao{
         List<HashMap<String, String>> games = new ArrayList<>();
         String query = String.format("SELECT * FROM Users WHERE Id = '%s'", id);
         ResultSet rs = this.executeAndGet(query);
-        return this.extractDataFromResult(rs);
+        return this.extractDataFromResult(rs, new ArrayList<String>(Arrays.asList(
+                                                                "UserId", "Name", "Password", "DateOfBirth")));
     }
 
     public List<HashMap<String, String>> getAll() {
         String query = String.format("SELECT * FROM Users");
         ResultSet rs = this.executeAndGet(query);
-        return this.extractDataFromResult(rs);
+        return this.extractDataFromResult(rs,new ArrayList<String>(Arrays.asList(
+                "UserId", "Name", "Password", "DateOfBirth")));
     }
 
     public boolean save(HashMap<String, String> userData) {
@@ -55,22 +58,4 @@ public class UserDao extends Dao{
         return b;
     }
 
-    @Override
-    List<HashMap<String, String>> extractDataFromResult(ResultSet rs) {
-        if (rs == null){return null;}
-        List<HashMap<String, String>> users = new ArrayList<>();
-        try {
-            while(rs.next()){
-                HashMap<String, String> userData = new HashMap<>();
-                userData.put("Id", rs.getString("UserId"));
-                userData.put("Password", rs.getString("Password"));
-                userData.put("DateOfBirth",rs.getString("DateOfBirth"));
-                userData.put("Name", rs.getString("Name"));
-                users.add(userData);
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return users;
-    }
 }

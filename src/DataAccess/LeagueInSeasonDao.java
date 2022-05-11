@@ -1,11 +1,37 @@
 package DataAccess;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+
+public class LeagueInSeasonDao extends Dao{
+    // single tone
+    private static LeagueInSeasonDao instance = new LeagueInSeasonDao();
+    public static LeagueInSeasonDao getInstance(){return instance;}
+    private LeagueInSeasonDao(){}
+
+    public List<HashMap<String, String>> get(HashMap<String, String> tableKey) {
+        String name = tableKey.get("Name");
+        String query = String.format("SELECT * FROM LeagueInSeason WHERE Name = '%s'", name);
+        ResultSet rs = this.executeAndGet(query);
+        return this.extractDataFromResult(rs, new ArrayList<String>(Arrays.asList(
+                "Id", "Name", "Season")));
+    }
+
+
+}
+/*
+
+package DataAccess;
+
+        import java.sql.ResultSet;
+        import java.sql.SQLException;
+        import java.util.ArrayList;
+        import java.util.Arrays;
+        import java.util.HashMap;
+        import java.util.List;
 
 //TODO: handle delete and update
 
@@ -58,3 +84,4 @@ public class LeagueAssociateDao extends Dao{
     }
 
 }
+*/

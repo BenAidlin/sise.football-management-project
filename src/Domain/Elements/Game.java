@@ -4,10 +4,10 @@ import java.util.Date;
 public class Game {
     Team homeTeam;
     Team awayTeam;
-    Referee ref;
+    String ref;
     Date date;
 
-    public Game(Team homeTeam, Team awayTeam, Referee ref, Date date) {
+    public Game(Team homeTeam, Team awayTeam, String ref, Date date) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
         this.ref = ref;
@@ -30,11 +30,11 @@ public class Game {
         this.awayTeam = awayTeam;
     }
 
-    public Referee getRef() {
+    public String getRef() {
         return ref;
     }
 
-    public void setRef(Referee ref) {
+    public void setRef(String ref) {
         this.ref = ref;
     }
 

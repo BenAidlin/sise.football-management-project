@@ -1,6 +1,6 @@
-package Domain;
+package Domain.Enums;
 
-public enum Status {
+public enum SignInUpStatus {
     Success,
     BadPassword,
     BadUserName,

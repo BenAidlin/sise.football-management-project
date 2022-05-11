@@ -3,6 +3,7 @@ package DataAccess;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,20 +13,22 @@ public class RefereeDao extends Dao{
     // single tone
     private static RefereeDao instance = new RefereeDao();
     public static RefereeDao getInstance(){return instance;}
-
+    private RefereeDao(){}
     public List<HashMap<String, String>> get(HashMap<String, String> tableKey) {
         String id = tableKey.get("Id");
         List<HashMap<String, String>> games = new ArrayList<>();
         String query = String.format("SELECT * FROM get_all_referees_data WHERE Id = '%s'", id);
         ResultSet rs = this.executeAndGet(query);
-        return this.extractDataFromResult(rs);
+        return this.extractDataFromResult(rs, new ArrayList<String>(Arrays.asList(
+                "Id", "Name", "Password", "DateOfBirth")));
     }
 
     public List<HashMap<String, String>> getAll() {
         List<HashMap<String, String>> games = new ArrayList<>();
         String query = String.format("SELECT * FROM get_all_referees_data");
         ResultSet rs = this.executeAndGet(query);
-        return this.extractDataFromResult(rs);
+        return this.extractDataFromResult(rs, new ArrayList<String>(Arrays.asList(
+                                                "Id", "Name", "Password", "DateOfBirth")));
     }
 
     public boolean save(HashMap<String, String> refereeData) {
@@ -54,22 +57,13 @@ public class RefereeDao extends Dao{
         return b;
     }
 
-    @Override
-    List<HashMap<String, String>> extractDataFromResult(ResultSet rs) {
-        if (rs == null){return null;}
-        List<HashMap<String, String>> referees = new ArrayList<>();
-        try {
-            while(rs.next()){
-                HashMap<String, String> userData = new HashMap<>();
-                userData.put("Id", rs.getString("Id"));
-                userData.put("Password", rs.getString("Password"));
-                userData.put("DateOfBirth",rs.getString("DateOfBirth"));
-                userData.put("Name", rs.getString("Name"));
-                referees.add(userData);
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+    public List<HashMap<String, String>> GetRefereesForSeason(String leagueName, int season) {
+        String query = String.format(
+                "select RefereeId from get_referees_data_for_league " +
+                        "where leagueName = '%s' and Season = %s", leagueName, season);
+        ResultSet rs = this.executeAndGet(query);
+        List<HashMap<String, String>> referees = extractDataFromResult(rs, new ArrayList<>( Arrays.asList("RefereeId")));
         return referees;
     }
+
 }
