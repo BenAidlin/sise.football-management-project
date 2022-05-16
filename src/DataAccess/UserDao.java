@@ -15,7 +15,7 @@ public class UserDao extends Dao{
     public List<HashMap<String, String>> get(HashMap<String, String> tableKey) {
         String id = tableKey.get("Id");
         List<HashMap<String, String>> games = new ArrayList<>();
-        String query = String.format("SELECT * FROM Users WHERE Id = '%s'", id);
+        String query = String.format("SELECT * FROM Users WHERE UserId = '%s'", id);
         ResultSet rs = this.executeAndGet(query);
         return this.extractDataFromResult(rs, new ArrayList<String>(Arrays.asList(
                                                                 "UserId", "Name", "Password", "DateOfBirth")));

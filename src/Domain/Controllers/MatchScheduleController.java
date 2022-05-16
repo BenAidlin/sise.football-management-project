@@ -24,22 +24,6 @@ public class MatchScheduleController {
         this.refDao = RefereeDao.getInstance();
     }
 
-/*    public GameScheduleStatus scheduleGame(String homeTeamName, String awayTeamName, String date) {
-        if(!checkDatesAvailable(homeTeamName, awayTeamName, date)) return GameScheduleStatus.DateTaken;
-        String hTeamId = getTeamsIdIfExists(homeTeamName);
-        String aTeamId = getTeamsIdIfExists(awayTeamName);
-        if(hTeamId == null || aTeamId == null) return GameScheduleStatus.TeamNotExists;
-        // TODO: ref scheduling ?
-        boolean b = gameDao.save(new HashMap<String, String>() {{
-            put("HomeTeam", hTeamId);
-            put("AwayTeam", aTeamId);
-            put("Date", date);
-            put("Referee", null);
-        }});
-        if(!b) return GameScheduleStatus.ConnectionError;
-        return GameScheduleStatus.Success;
-    }*/
-
     public String getTeamsIdIfExists(String teamName){
         return teamDao.getTeamId(teamName);
     }

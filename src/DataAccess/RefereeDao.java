@@ -65,5 +65,16 @@ public class RefereeDao extends Dao{
         List<HashMap<String, String>> referees = extractDataFromResult(rs, new ArrayList<>( Arrays.asList("RefereeId")));
         return referees;
     }
-
+    public List<HashMap<String, String>> GetRefereeInLeague(String refereeId, String leagueId) {
+        String query = String.format(
+                "select RefereeId from RefereeInLeague where RefereeId = '%s' and leagueId = '%s'", refereeId, leagueId);
+        ResultSet rs = this.executeAndGet(query);
+        List<HashMap<String, String>> referees = extractDataFromResult(rs, new ArrayList<>( Arrays.asList("RefereeId")));
+        return referees;
+    }
+    public boolean AddRefereeToLeague(String refereeId, String leagueId){
+        String query = String.format("insert into RefereeInLeague VALUES('%s', %s)", refereeId, leagueId);
+        boolean b = this.execute(query);
+        return b;
+    }
 }
