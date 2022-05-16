@@ -69,8 +69,8 @@ public class MatchScheduleController {
             teamList.add(new Team(team.get("teamId"), team.get("teamName")));
         }
         List<Game> scheduled;
-        if(policy == ScheduelsPolicies.simple)scheduled = randomSchedule(teamList, refList);
-        else if (policy == ScheduelsPolicies.smart) scheduled = smartSchedule(teamList, refList);
+        if(policy == ScheduelsPolicies.homeAndAway)scheduled = MatchSchedule(teamList, refList, false);
+        else if (policy == ScheduelsPolicies.onlyHomeOrAway) scheduled = MatchSchedule(teamList, refList, true);
         else return GameScheduleStatus.NoSuchPolicy;
         if(scheduled == null) return GameScheduleStatus.NotEnoughData;
 
@@ -89,15 +89,19 @@ public class MatchScheduleController {
         return GameScheduleStatus.Success;
     }
 
-    private List<Game> randomSchedule(List<Team> teams, List<String> refList){
+    private List<Game> MatchSchedule(List<Team> teams, List<String> refList, boolean oneMatch){
         List<Game> games = new ArrayList<>();
         Date d = new Date();
         d.setDate(d.getDate() +  7);
         int numOfRefs = refList.size();
         int indexOfNextRef = 0;
-        for (Team homeTeam: teams ) {
-            for (Team awayTeam: teams) {
-                if(homeTeam.getId().equals(awayTeam.getId())) continue;
+        for (int i=0;i< teams.size();i++) {
+            Team homeTeam = teams.get(i);
+            int j;
+            if(oneMatch) j=i+1; else j=0;
+            for (j=j;j< teams.size();j++) {
+                if (i==j) continue;
+                Team awayTeam = teams.get(j);
                 if(indexOfNextRef==numOfRefs) indexOfNextRef=0;
                 Date d_to_set = new Date();
                 d_to_set.setDate(d.getDate());
@@ -108,28 +112,5 @@ public class MatchScheduleController {
             }
         }
         return  games;
-
-    }
-    private List<Game> smartSchedule(List<Team> teams, List<String> refList){
-        List<Game> games = new ArrayList<>();
-        if(refList.size()<(teams.size()/2)) return null;
-        Date d = new Date();
-        d.setDate(d.getDate() +  30);
-        for(int i=0; i<teams.size();i++){
-            int indexOfNextRef = 0;
-            d.setDate(d.getDate() +  7);
-            for(int j=0;j<teams.size();j++){
-                Team homeTeam = teams.get(j);
-                int other = teams.size()-j-i-1;
-                while(other<0)other+=teams.size();
-                Team awayTeam = teams.get(other);
-                Game g = new Game(homeTeam,awayTeam,refList.get(indexOfNextRef % refList.size()),d);
-                games.add(g);
-                indexOfNextRef+=1;
-                if(j>=teams.size()/2)
-                    d.setDate(d.getDate() +  7);
-            }
-        }
-        return games;
     }
 }

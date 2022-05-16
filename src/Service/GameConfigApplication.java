@@ -15,8 +15,8 @@ public class GameConfigApplication {
     }*/
 
     public String gamesSchedule(String leagueName, int season, String policy){
-        ScheduelsPolicies p = ScheduelsPolicies.simple;
-        if(policy.equals("smart")) p = ScheduelsPolicies.smart;
+        ScheduelsPolicies p = ScheduelsPolicies.homeAndAway;
+        if(policy.equals("one game")) p = ScheduelsPolicies.onlyHomeOrAway;
         GameScheduleStatus s = controller.scheduleGame(leagueName, season, p);
         String toRet = "Games successfully scheduled!";
         if(s!=GameScheduleStatus.Success)
