@@ -4,7 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-public class GameDao extends Dao{
+public class GameDao extends Dao implements IGameDao{
     // single tone
     private static GameDao instance = new GameDao();
     public static GameDao getInstance(){return instance;}

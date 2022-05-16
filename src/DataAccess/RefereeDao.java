@@ -9,14 +9,13 @@ import java.util.List;
 
 //TODO: handle delete and update
 
-public class RefereeDao extends Dao{
+public class RefereeDao extends Dao implements IRefereeDao{
     // single tone
     private static RefereeDao instance = new RefereeDao();
     public static RefereeDao getInstance(){return instance;}
     private RefereeDao(){}
     public List<HashMap<String, String>> get(HashMap<String, String> tableKey) {
         String id = tableKey.get("Id");
-        List<HashMap<String, String>> games = new ArrayList<>();
         String query = String.format("SELECT * FROM get_all_referees_data WHERE Id = '%s'", id);
         ResultSet rs = this.executeAndGet(query);
         return this.extractDataFromResult(rs, new ArrayList<String>(Arrays.asList(
@@ -24,7 +23,6 @@ public class RefereeDao extends Dao{
     }
 
     public List<HashMap<String, String>> getAll() {
-        List<HashMap<String, String>> games = new ArrayList<>();
         String query = String.format("SELECT * FROM get_all_referees_data");
         ResultSet rs = this.executeAndGet(query);
         return this.extractDataFromResult(rs, new ArrayList<String>(Arrays.asList(

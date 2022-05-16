@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class TeamDao extends Dao{
+public class TeamDao extends Dao implements ITeamDao{
     //single tone
     private static TeamDao instance = new TeamDao();
     public static TeamDao getInstance(){return instance;}

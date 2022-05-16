@@ -7,14 +7,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class UserDao extends Dao{
+public class UserDao extends Dao implements IUserDao{
     // single tone
-    private static UserDao instance = new UserDao();
-    public static UserDao getInstance(){return instance;}
+    private static  IUserDao instance = new UserDao();
+    public static IUserDao getInstance(){return instance;}
 
     public List<HashMap<String, String>> get(HashMap<String, String> tableKey) {
         String id = tableKey.get("Id");
-        List<HashMap<String, String>> games = new ArrayList<>();
         String query = String.format("SELECT * FROM Users WHERE UserId = '%s'", id);
         ResultSet rs = this.executeAndGet(query);
         return this.extractDataFromResult(rs, new ArrayList<String>(Arrays.asList(

@@ -1,8 +1,6 @@
 package Domain.Controllers;
 
-import DataAccess.LeagueInSeasonDao;
-import DataAccess.RefereeDao;
-import DataAccess.UserDao;
+import DataAccess.*;
 import Domain.Elements.User;
 import Domain.Enums.AddRefereeToLeagueStatus;
 import Domain.Enums.RegisterRefereeStatus;
@@ -11,9 +9,15 @@ import java.util.HashMap;
 import java.util.List;
 
 public class RefereeRegisterController {
-    RefereeDao refereeDao;
-    UserDao userDao;
-    LeagueInSeasonDao leagueInSeasonDao;
+    IRefereeDao refereeDao;
+    IUserDao userDao;
+    ILeagueInSeasonDao leagueInSeasonDao;
+
+    public RefereeRegisterController(IRefereeDao refereeDao, IUserDao userDao, ILeagueInSeasonDao leagueInSeasonDao) {
+        this.refereeDao = refereeDao;
+        this.userDao = userDao;
+        this.leagueInSeasonDao = leagueInSeasonDao;
+    }
 
     public RefereeRegisterController() {
         this.refereeDao = RefereeDao.getInstance();

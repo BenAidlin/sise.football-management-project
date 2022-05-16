@@ -1,8 +1,6 @@
 package Domain.Controllers;
 
-import DataAccess.GameDao;
-import DataAccess.RefereeDao;
-import DataAccess.TeamDao;
+import DataAccess.*;
 import Domain.Elements.Game;
 import Domain.Elements.Team;
 import Domain.Enums.GameScheduleStatus;
@@ -14,9 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 
 public class MatchScheduleController {
-    GameDao gameDao;
-    TeamDao teamDao;
-    RefereeDao refDao;
+    IGameDao gameDao;
+    ITeamDao teamDao;
+    IRefereeDao refDao;
 
     public MatchScheduleController() {
         this.gameDao = GameDao.getInstance();
@@ -24,24 +22,17 @@ public class MatchScheduleController {
         this.refDao = RefereeDao.getInstance();
     }
 
-    public String getTeamsIdIfExists(String teamName){
-        return teamDao.getTeamId(teamName);
+    public MatchScheduleController(IGameDao gameDao, ITeamDao teamDao, IRefereeDao refDao) {
+        this.gameDao = gameDao;
+        this.teamDao = teamDao;
+        this.refDao = refDao;
     }
 
-    public boolean checkDatesAvailable(String homeTeamName, String awayTeamName, String date) {
-        List<String> awayDates = this.teamDao.getAllGameDatesOfTeam(awayTeamName);
-        List<String> homeDates = this.teamDao.getAllGameDatesOfTeam(homeTeamName);
-        awayDates.addAll(homeDates);
-        for (String d: awayDates
-        ) {
-            if(d.equals(date)){
-                return false;
-            }
-        }
-        return true;
-    }
 
     public GameScheduleStatus scheduleGame(String leagueName, int season, ScheduelsPolicies policy) {
+        if( policy != ScheduelsPolicies.homeAndAway && policy != ScheduelsPolicies.onlyHomeOrAway){
+            return GameScheduleStatus.NoSuchPolicy;
+        }
         List<HashMap<String, String>> refs = refDao.GetRefereesForSeason(leagueName, season);
         List<String> refList = new ArrayList<>();
         for (HashMap<String, String> refId:refs ) {
@@ -52,10 +43,9 @@ public class MatchScheduleController {
         for (HashMap<String, String> team:teams ) {
             teamList.add(new Team(team.get("teamId"), team.get("teamName")));
         }
-        List<Game> scheduled;
+        List<Game> scheduled = null;
         if(policy == ScheduelsPolicies.homeAndAway)scheduled = MatchSchedule(teamList, refList, false);
         else if (policy == ScheduelsPolicies.onlyHomeOrAway) scheduled = MatchSchedule(teamList, refList, true);
-        else return GameScheduleStatus.NoSuchPolicy;
         if(scheduled == null) return GameScheduleStatus.NotEnoughData;
 
         for (Game g: scheduled) {

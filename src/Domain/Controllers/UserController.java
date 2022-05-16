@@ -1,5 +1,6 @@
 package Domain.Controllers;
 
+import DataAccess.IUserDao;
 import DataAccess.UserDao;
 import Domain.Elements.User;
 import Domain.Enums.SignInUpStatus;
@@ -8,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class UserController {
-    UserDao userDao;
+    IUserDao userDao;
 
     private User createUser(HashMap<String,String> userData){
         String Id = userData.get("UserId");
@@ -20,6 +21,10 @@ public class UserController {
 
     public UserController() {
         userDao = UserDao.getInstance();
+    }
+
+    public UserController(IUserDao iud) {
+        userDao = iud;
     }
 
     public SignInUpStatus insertUser(String userId, String password, String dateOfBirth, String name){

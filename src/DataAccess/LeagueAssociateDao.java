@@ -16,7 +16,6 @@ public class LeagueAssociateDao extends Dao{
     private LeagueAssociateDao(){}
     public List<HashMap<String, String>> get(HashMap<String, String> tableKey) {
         String id = tableKey.get("Id");
-        List<HashMap<String, String>> games = new ArrayList<>();
         String query = String.format("SELECT * FROM get_all_league_associate_data WHERE Id = '%s'", id);
         ResultSet rs = this.executeAndGet(query);
         return this.extractDataFromResult(rs, new ArrayList<String>(Arrays.asList(
@@ -24,7 +23,6 @@ public class LeagueAssociateDao extends Dao{
     }
 
     public List<HashMap<String, String>> getAll() {
-        List<HashMap<String, String>> games = new ArrayList<>();
         String query = String.format("SELECT * FROM get_all_league_associate_data");
         ResultSet rs = this.executeAndGet(query);
         return this.extractDataFromResult(rs, new ArrayList<String>(Arrays.asList(
