@@ -46,7 +46,6 @@ public class MatchScheduleController {
         List<Game> scheduled = null;
         if(policy == ScheduelsPolicies.homeAndAway)scheduled = MatchSchedule(teamList, refList, false);
         else if (policy == ScheduelsPolicies.onlyHomeOrAway) scheduled = MatchSchedule(teamList, refList, true);
-        if(scheduled == null) return GameScheduleStatus.NotEnoughData;
 
         for (Game g: scheduled) {
             HashMap<String, String> dataGame = new HashMap<String, String>(){

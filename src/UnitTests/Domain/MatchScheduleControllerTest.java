@@ -7,6 +7,7 @@ import DataAccess.ITeamDao;
 import Domain.Controllers.MatchScheduleController;
 import Domain.Enums.GameScheduleStatus;
 import Domain.Enums.ScheduelsPolicies;
+import Domain.Enums.SignInUpStatus;
 import UnitTests.Mocks.GameDaoMock;
 import UnitTests.Mocks.RefereeDaoMock;
 import UnitTests.Mocks.TeamDaoMock;
@@ -39,15 +40,18 @@ public class MatchScheduleControllerTest {
 
     @Test
     void scheduleGame_numberOfGamesTestHomeAndAway(){
-        scheduleGame_numberOfGamesHelper(ScheduelsPolicies.homeAndAway, 12);
+        scheduleGame_numberOfGamesHelper(ScheduelsPolicies.homeAndAway, 12, true, GameScheduleStatus.Success);
     }
     @Test
     void scheduleGame_numberOfGamesTestOnlyHomeOrAway(){
-        scheduleGame_numberOfGamesHelper(ScheduelsPolicies.onlyHomeOrAway, 6);
+        scheduleGame_numberOfGamesHelper(ScheduelsPolicies.onlyHomeOrAway, 6, true, GameScheduleStatus.Success);
+    }
+    @Test
+    void scheduleGame_connectionError(){
+        scheduleGame_numberOfGamesHelper(ScheduelsPolicies.onlyHomeOrAway, 6, false, GameScheduleStatus.ConnectionError);
     }
 
-
-    void scheduleGame_numberOfGamesHelper(ScheduelsPolicies s, int expected){
+    void scheduleGame_numberOfGamesHelper(ScheduelsPolicies s, int expected, boolean saveSuccess, GameScheduleStatus expectedStatus){
         // prepare teams data
         List<HashMap<String, String>> teamsToSet = new ArrayList<>();
         for(int i=0;i<4;i++){
@@ -65,11 +69,12 @@ public class MatchScheduleControllerTest {
         }
         refereeDaoMock.setReturnsLst(refereesToSet);
 
+        gameDaoMock.setB(saveSuccess);
         GameScheduleStatus returnStatus =  MatchScheduleControllerTest.matchScheduleController
                 .scheduleGame("", 0, s);
         int actual = gameDaoMock.getNum();
         assertEquals(expected, actual);
-        assertEquals(returnStatus, GameScheduleStatus.Success);
+        assertEquals(returnStatus, expectedStatus);
     }
 
     @AfterEach

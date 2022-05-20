@@ -9,6 +9,16 @@ import java.util.List;
 public class RefereeDaoMock implements IRefereeDao {
     boolean b = true;
     List<HashMap<String, String>> returnsLst = new ArrayList<>();
+
+    public List<HashMap<String, String>> getReturnsLstFromRefInLeague() {
+        return returnsLstFromRefInLeague;
+    }
+
+    public void setReturnsLstFromRefInLeague(List<HashMap<String, String>> returnsLstFromRefInLeague) {
+        this.returnsLstFromRefInLeague = returnsLstFromRefInLeague;
+    }
+
+    List<HashMap<String, String>> returnsLstFromRefInLeague = new ArrayList<>();
     @Override
     public List<HashMap<String, String>> get(HashMap<String, String> tableKey) {
         return returnsLst;
@@ -26,7 +36,7 @@ public class RefereeDaoMock implements IRefereeDao {
 
     @Override
     public List<HashMap<String, String>> GetRefereeInLeague(String refereeId, String leagueId) {
-        return returnsLst;
+        return returnsLstFromRefInLeague;
     }
 
     @Override
