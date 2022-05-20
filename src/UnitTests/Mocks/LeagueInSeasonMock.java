@@ -8,10 +8,6 @@ import java.util.List;
 public class LeagueInSeasonMock implements ILeagueInSeasonDao {
     List<HashMap<String, String>> returnFromMock;
 
-    @Override
-    public List<HashMap<String, String>> get(HashMap<String, String> tableKey) {
-        return returnFromMock;
-    }
 
     @Override
     public List<HashMap<String, String>> getById(HashMap<String, String> tableKey) {

@@ -20,11 +20,6 @@ public class TeamDao extends Dao implements ITeamDao{
         return this.extractDataFromResult(rs, new ArrayList<String>(Arrays.asList("Id", "Name")));
     }
 
-    public List<HashMap<String, String>> getAll() {
-        String query = String.format("SELECT * FROM Teams");
-        ResultSet rs = this.executeAndGet(query);
-        return this.extractDataFromResult(rs, new ArrayList<String>(Arrays.asList("Id", "Name")));
-    }
 
     public boolean save(HashMap<String, String> teamData) {
         String Name = teamData.get("Name");
@@ -33,13 +28,6 @@ public class TeamDao extends Dao implements ITeamDao{
         return b;
     }
 
-    public boolean update(HashMap<String, String> teamData) {
-        String Id = teamData.get("Id");
-        String Name = teamData.get("Name");
-        String query = String.format("UPDATE Teams SET Name = %s" + "WHERE Id = %s", Id, Name);
-        boolean b = this.execute(query);
-        return b;
-    }
 
     public boolean delete(HashMap<String, String> teamData) {
         String Id = teamData.get("Id");
@@ -48,28 +36,6 @@ public class TeamDao extends Dao implements ITeamDao{
         return b;
     }
 
-    public List<String> getAllGameDatesOfTeam(String teamName){
-        String query =
-                String.format("SELECT date as date from Games inner join Teams on " +
-                        "Games.AwayTeam = Teams.Id or Games.HomeTeam = Teams.Id " +
-                        "WHERE Teams.Name = '%s' And Games.Date is not NULL", teamName);
-        ResultSet rs = this.executeAndGet(query);
-        List<HashMap<String, String>> hmLst = this.extractDataFromResult(rs, new ArrayList<String>(Arrays.asList("date")));
-        List<String> dates = new ArrayList<>();
-        for (HashMap<String, String> hm: hmLst
-             ) {
-            dates.add(hm.get("date"));
-        }
-        return dates;
-    }
-
-    public String getTeamId(String teamName) {
-        String query = String.format("SELECT Id FROM Teams WHERE Name = '%s'", teamName);
-        ResultSet rs = this.executeAndGet(query);
-        List<HashMap<String, String>> ids = extractDataFromResult(rs, new ArrayList<>( Arrays.asList("id")));
-        if (ids.size() == 0) return null;
-        else return ids.get(0).get("Id");
-    }
 
     public List<HashMap<String, String>> GetTeamsForSeason(String leagueName, int season) {
         String query = String.format(

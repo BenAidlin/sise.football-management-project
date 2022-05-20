@@ -38,18 +38,6 @@ public class UserDao extends Dao implements IUserDao{
         return b;
     }
 
-    public boolean update(HashMap<String, String> userData) {
-        String Id = userData.get("Id");
-        String Password = userData.get("Password");
-        String DateOfBirth = userData.get("DateOfBirth");
-        String Name = userData.get("Name");
-        String query = String.format("UPDATE Users SET Password = %s, DateOfBirth = %s, Name = %s" +
-                                     "WHERE  UserId = %s",
-                                      Password, DateOfBirth, Name , Id);
-        boolean b = this.execute(query);
-        return b;
-    }
-
     public boolean delete(HashMap<String, String> userData) {
         String Id = userData.get("Id");
         String query = String.format("DELETE FROM Users" + "WHERE  Id = %s", Id);

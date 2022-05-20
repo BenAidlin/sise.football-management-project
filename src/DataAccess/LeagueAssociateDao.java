@@ -22,13 +22,6 @@ public class LeagueAssociateDao extends Dao{
                 "Id", "Name", "Password", "DateOfBirth")));
     }
 
-    public List<HashMap<String, String>> getAll() {
-        String query = String.format("SELECT * FROM get_all_league_associate_data");
-        ResultSet rs = this.executeAndGet(query);
-        return this.extractDataFromResult(rs, new ArrayList<String>(Arrays.asList(
-                "Id", "Name", "Password", "DateOfBirth")));
-    }
-
     public boolean save(HashMap<String, String> laData) {
         String Id = laData.get("Id");
         String query = String.format("INSERT INTO LeagueAssociate VALUES('%s')", Id);
@@ -36,17 +29,6 @@ public class LeagueAssociateDao extends Dao{
         return b;
     }
 
-    public boolean update(HashMap<String, String> laData) {
-        String Id = laData.get("Id");
-        String Password = laData.get("Password");
-        String DateOfBirth = laData.get("DateOfBirth");
-        String Name = laData.get("Name");
-        String query = String.format("UPDATE Users SET Password = %s, DateOfBirth = %s, Name = %s" +
-                        "WHERE  UserId = %s",
-                Password, DateOfBirth, Name , Id);
-        boolean b = this.execute(query);
-        return b;
-    }
 
     public boolean delete(HashMap<String, String> laData) {
         String Id = laData.get("Id");
