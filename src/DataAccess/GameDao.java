@@ -10,8 +10,10 @@ public class GameDao extends Dao implements IGameDao{
     public static GameDao getInstance(){return instance;}
     private GameDao(){}
     public List<HashMap<String, String>> get(HashMap<String, String> tableKey) {
-        String Id = tableKey.get("Id");
-        String query = String.format("SELECT * FROM Games WHERE Id = '%s'", Id);
+        String home = tableKey.get("HomeTeam");
+        String away = tableKey.get("AwayTeam");
+        String date = tableKey.get("Date");
+        String query = String.format("SELECT * FROM Games WHERE HomeTeam = '%s' and AwayTeam = '%s' and Date = '%s'", home, away, date);
         ResultSet rs = this.executeAndGet(query);
         return this.extractDataFromResult(rs, new ArrayList<String>(Arrays.asList( "Id","HomeTeam", "AwayTeam", "Date", "Referee")));
     }
@@ -22,7 +24,7 @@ public class GameDao extends Dao implements IGameDao{
         String date = gameData.get("Date");
         String refId = gameData.get("Referee");
 
-        String query = String.format("INSERT INTO Games VALUES(%s,%s,'%s','%s',ifnull ((SELECT\n" +
+        String query = String.format("INSERT INTO Games VALUES('%s','%s','%s','%s',ifnull ((SELECT\n" +
                 "  max(Id) from Games) + 1,0), (select Id from LeagueInSeason where Name = '%s' and Season = %s))",
                 homeTeamId, awayTeamId, refId, date, leagueName, season);
         return this.execute(query);
