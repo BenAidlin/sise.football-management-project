@@ -35,7 +35,7 @@ public class UserController {
                 return SignInUpStatus.UserIdTaken;
         }
         HashMap<String, String> toInsert = new HashMap<String, String>() {{
-            put("Id", userId);
+            put("UserId", userId);
             put("Password", password);
             put("DateOfBirth", dateOfBirth);
             put("Name", name);

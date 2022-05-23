@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="footballDB.db" uuid="48df22d4-feef-4658-b8d9-3d7776b5adc3">
+    <data-source source="LOCAL" name="footballDB" uuid="cbdad0e2-236c-4bec-ba4d-e1145ced675e">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/DB/footballDB.db</jdbc-url>
+      <jdbc-url>jdbc:sqlite:C:\Users\donnk\JavaProjects\project.prep.implement.hw3\DB\footballDB.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

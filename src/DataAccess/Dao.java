@@ -20,7 +20,7 @@ import java.util.*;
 abstract class Dao {
     DbConnector connector = DbConnector.getInstance();
 
-    ResultSet executeAndGet(String query) {
+    public ResultSet executeAndGet(String query) {
         try {
             ResultSet rs = connector.getConnection().createStatement().executeQuery(query);
             return rs;
@@ -30,7 +30,7 @@ abstract class Dao {
         return null;
     }
 
-    boolean execute(String query) {
+    public boolean execute(String query) {
         try {
             connector.getConnection().createStatement().executeUpdate(query);
             return true;
