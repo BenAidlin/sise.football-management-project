@@ -40,7 +40,7 @@ public class UserDao extends Dao implements IUserDao{
 
     public boolean delete(HashMap<String, String> userData) {
         String Id = userData.get("Id");
-        String query = String.format("DELETE FROM Users" + "WHERE  Id = %s", Id);
+        String query = String.format("DELETE FROM Users WHERE  UserId = '%s'", Id);
         boolean b = this.execute(query);
         return b;
     }

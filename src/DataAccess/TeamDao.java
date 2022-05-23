@@ -14,8 +14,8 @@ public class TeamDao extends Dao implements ITeamDao{
     private TeamDao(){}
 
     public List<HashMap<String, String>> get(HashMap<String, String> tableKey) {
-        String id = tableKey.get("Id");
-        String query = String.format("SELECT * FROM Teams WHERE Id = '%s'" , id);
+        String name = tableKey.get("Name");
+        String query = String.format("SELECT * FROM Teams WHERE Name = '%s'" , name);
         ResultSet rs = this.executeAndGet(query);
         return this.extractDataFromResult(rs, new ArrayList<String>(Arrays.asList("Id", "Name")));
     }
@@ -23,7 +23,7 @@ public class TeamDao extends Dao implements ITeamDao{
 
     public boolean save(HashMap<String, String> teamData) {
         String Name = teamData.get("Name");
-        String query = String.format("INSERT INTO Teams VALUES('%s')", Name);
+        String query = String.format("INSERT INTO Teams VALUES(cast((select max(cast(Id as int))+1 from Teams) as varchar), '%s' )", Name);
         boolean b = this.execute(query);
         return b;
     }

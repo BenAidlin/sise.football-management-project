@@ -32,7 +32,7 @@ public class RefereeDao extends Dao implements IRefereeDao{
 
     public boolean delete(HashMap<String, String> refereeData) {
         String Id = refereeData.get("Id");
-        String query = String.format("DELETE FROM RefereeInLeague WHERE RefereeId = '%s'; DELETE FROM Referee WHERE  Id = '%s';", Id);
+        String query = String.format("DELETE FROM RefereeInLeague WHERE RefereeId = '%s'; DELETE FROM Referee WHERE  Id = '%s';", Id, Id);
         boolean b = this.execute(query);
         return b;
     }
@@ -54,6 +54,12 @@ public class RefereeDao extends Dao implements IRefereeDao{
     }
     public boolean AddRefereeToLeague(String refereeId, String leagueId){
         String query = String.format("insert into RefereeInLeague VALUES('%s', %s)", refereeId, leagueId);
+        boolean b = this.execute(query);
+        return b;
+    }
+
+    public boolean DeleteRefereeFromLeague(String refereeId, String leagueId){
+        String query = String.format("delete from RefereeInLeague where RefereeId = '%s' and LeagueId = '%s'", refereeId, leagueId);
         boolean b = this.execute(query);
         return b;
     }
