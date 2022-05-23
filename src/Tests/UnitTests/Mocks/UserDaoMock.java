@@ -1,4 +1,4 @@
-package UnitTests.Mocks;
+package Tests.UnitTests.Mocks;
 
 import DataAccess.IUserDao;
 

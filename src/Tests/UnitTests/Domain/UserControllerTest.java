@@ -1,9 +1,9 @@
-package UnitTests.Domain;
+package Tests.UnitTests.Domain;
 
 import Domain.Controllers.UserController;
 import Domain.Elements.User;
 import Domain.Enums.SignInUpStatus;
-import UnitTests.Mocks.UserDaoMock;
+import Tests.UnitTests.Mocks.UserDaoMock;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

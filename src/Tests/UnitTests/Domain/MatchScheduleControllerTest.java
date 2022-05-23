@@ -1,16 +1,11 @@
-package UnitTests.Domain;
+package Tests.UnitTests.Domain;
 
-import DataAccess.GameDao;
-import DataAccess.IGameDao;
-import DataAccess.IRefereeDao;
-import DataAccess.ITeamDao;
 import Domain.Controllers.MatchScheduleController;
 import Domain.Enums.GameScheduleStatus;
 import Domain.Enums.ScheduelsPolicies;
-import Domain.Enums.SignInUpStatus;
-import UnitTests.Mocks.GameDaoMock;
-import UnitTests.Mocks.RefereeDaoMock;
-import UnitTests.Mocks.TeamDaoMock;
+import Tests.UnitTests.Mocks.GameDaoMock;
+import Tests.UnitTests.Mocks.RefereeDaoMock;
+import Tests.UnitTests.Mocks.TeamDaoMock;
 import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
@@ -48,7 +43,7 @@ public class MatchScheduleControllerTest {
     }
     @Test
     void scheduleGame_connectionError(){
-        scheduleGame_numberOfGamesHelper(ScheduelsPolicies.onlyHomeOrAway, 6, false, GameScheduleStatus.ConnectionError);
+        scheduleGame_numberOfGamesHelper(ScheduelsPolicies.onlyHomeOrAway, 1, false, GameScheduleStatus.ConnectionError);
     }
 
     void scheduleGame_numberOfGamesHelper(ScheduelsPolicies s, int expected, boolean saveSuccess, GameScheduleStatus expectedStatus){

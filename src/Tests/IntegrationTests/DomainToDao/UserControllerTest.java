@@ -1,4 +1,4 @@
-package IntegrationTests.DomainToDao;
+package Tests.IntegrationTests.DomainToDao;
 
 import DataAccess.UserDao;
 import Domain.Controllers.UserController;

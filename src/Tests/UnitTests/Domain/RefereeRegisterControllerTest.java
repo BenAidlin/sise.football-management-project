@@ -1,11 +1,11 @@
-package UnitTests.Domain;
+package Tests.UnitTests.Domain;
 
 import Domain.Controllers.RefereeRegisterController;
 import Domain.Enums.AddRefereeToLeagueStatus;
 import Domain.Enums.RegisterRefereeStatus;
-import UnitTests.Mocks.LeagueInSeasonMock;
-import UnitTests.Mocks.RefereeDaoMock;
-import UnitTests.Mocks.UserDaoMock;
+import Tests.UnitTests.Mocks.LeagueInSeasonMock;
+import Tests.UnitTests.Mocks.RefereeDaoMock;
+import Tests.UnitTests.Mocks.UserDaoMock;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

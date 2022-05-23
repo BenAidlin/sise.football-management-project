@@ -1,4 +1,4 @@
-package IntegrationTests.DataAccess;
+package Tests.IntegrationTests.DataAccess;
 
 import DataAccess.TeamDao;
 import org.junit.jupiter.api.BeforeAll;

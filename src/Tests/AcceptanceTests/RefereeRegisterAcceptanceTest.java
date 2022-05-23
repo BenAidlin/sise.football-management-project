@@ -1,15 +1,11 @@
-package AcceptanceTests;
+package Tests.AcceptanceTests;
 
-import DataAccess.UserDao;
 import Domain.Enums.RegisterRefereeStatus;
 import Service.RefereeRegisterApplication;
-import Service.UserApplication;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.Date;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

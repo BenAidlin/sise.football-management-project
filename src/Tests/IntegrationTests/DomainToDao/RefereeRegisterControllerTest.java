@@ -1,4 +1,4 @@
-package IntegrationTests.DomainToDao;
+package Tests.IntegrationTests.DomainToDao;
 
 import DataAccess.RefereeDao;
 import Domain.Controllers.RefereeRegisterController;

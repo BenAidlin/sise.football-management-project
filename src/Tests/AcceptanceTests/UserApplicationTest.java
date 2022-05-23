@@ -1,4 +1,4 @@
-package AcceptanceTests;
+package Tests.AcceptanceTests;
 import DataAccess.UserDao;
 import Domain.Elements.User;
 import Service.UserApplication;

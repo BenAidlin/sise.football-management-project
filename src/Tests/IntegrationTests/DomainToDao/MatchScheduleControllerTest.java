@@ -1,4 +1,4 @@
-package IntegrationTests.DomainToDao;
+package Tests.IntegrationTests.DomainToDao;
 
 import DataAccess.GameDao;
 import Domain.Controllers.MatchScheduleController;
@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,6 +1,5 @@
-package IntegrationTests.DataAccess;
+package Tests.IntegrationTests.DataAccess;
 
-import DataAccess.GameDao;
 import DataAccess.IUserDao;
 import DataAccess.UserDao;
 import org.junit.jupiter.api.BeforeAll;

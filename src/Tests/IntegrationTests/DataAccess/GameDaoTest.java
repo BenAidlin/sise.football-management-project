@@ -1,10 +1,9 @@
-package IntegrationTests.DataAccess;
+package Tests.IntegrationTests.DataAccess;
 
 import DataAccess.GameDao;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
