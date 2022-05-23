@@ -44,6 +44,7 @@ public class UserController {
         if(!res) return SignInUpStatus.SomethingWentWrong;
         return SignInUpStatus.Success;
     }
+
     public SignInUpStatus logIn(String userId, String password){
         List<HashMap<String, String>> usersInSys = userDao.getAll();
         User rightUser = null;

@@ -57,4 +57,10 @@ public class RefereeDao extends Dao implements IRefereeDao{
         boolean b = this.execute(query);
         return b;
     }
+
+    public boolean DeleteRefereeFromLeague(String refereeId, String leagueId){
+        String query = String.format("delete from RefereeInLeague where RefereeId = '%s' and LeagueId = '%s'", refereeId, leagueId);
+        boolean b = this.execute(query);
+        return b;
+    }
 }

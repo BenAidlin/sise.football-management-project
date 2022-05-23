@@ -26,6 +26,11 @@ public class UserDaoMock implements IUserDao {
         return returnFromSave;
     }
 
+    @Override
+    public boolean delete(HashMap<String, String> userData) {
+        return false;
+    }
+
     public List<HashMap<String, String>> getReturnFromGet() {
         return returnFromGet;
     }
